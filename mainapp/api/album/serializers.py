@@ -6,7 +6,7 @@ from mainapp.models import Album, Song
 class AlbumListModelSerializer(ModelSerializer):
     class Meta:
         model = Album
-        fields = ['id', 'singer', 'name']
+        fields = ['id', 'singer', 'name', 'year']
 
     singer = SerializerMethodField()
 
@@ -18,7 +18,7 @@ class AlbumListModelSerializer(ModelSerializer):
 class AlbumSongSerializer(ModelSerializer):
     class Meta:
         model = Song
-        fields = ['number', 'name']
+        fields = ['id', 'number', 'name']
 
     name = SerializerMethodField()
 
@@ -27,10 +27,10 @@ class AlbumSongSerializer(ModelSerializer):
         return obj.song.name
 
 
-class AlbumRetrieveModelSerializer(AlbumListModelSerializer):
+class AlbumRetrieveModelSerializer(ModelSerializer):
     class Meta:
         model = Album
-        fields = ['id', 'singer', 'name', 'songs']
+        fields = ['id', 'singer', 'name', 'year', 'songs']
 
     singer = SerializerMethodField()
     songs = AlbumSongSerializer(many=True)
@@ -38,3 +38,9 @@ class AlbumRetrieveModelSerializer(AlbumListModelSerializer):
     @staticmethod
     def get_singer(obj):
         return obj.singer.name
+
+
+class AlbumCreateUpdateModelSerializer(ModelSerializer):
+    class Meta:
+        model = Album
+        fields = ['singer', 'name', 'year']

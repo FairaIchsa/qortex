@@ -1,6 +1,6 @@
 from rest_framework.viewsets import ModelViewSet
 
-from .serializers import AlbumListModelSerializer, AlbumRetrieveModelSerializer
+from .serializers import AlbumListModelSerializer, AlbumRetrieveModelSerializer, AlbumCreateUpdateModelSerializer
 from ...models import Album
 
 
@@ -12,3 +12,5 @@ class AlbumModelViewset(ModelViewSet):
             return AlbumListModelSerializer
         if self.action == 'retrieve':
             return AlbumRetrieveModelSerializer
+        if self.action == 'create' or self.action == 'update':
+            return AlbumCreateUpdateModelSerializer
