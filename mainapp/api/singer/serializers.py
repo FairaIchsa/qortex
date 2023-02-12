@@ -1,10 +1,29 @@
-from rest_framework import serializers
+from rest_framework.serializers import ModelSerializer
 
-from mainapp.models import Singer
+from mainapp.models import Singer, Album
 
 
-class SingerModelSerializer(serializers.ModelSerializer):
+class SingerListModelSerializer(ModelSerializer):
     class Meta:
         model = Singer
-        fields = '__all__'
+        fields = ['id', 'name']
 
+
+class SingerAlbumSerializer(ModelSerializer):
+    class Meta:
+        model = Album
+        fields = ['id', 'name', 'year']
+
+
+class SingerRetrieveModelSerializer(ModelSerializer):
+    class Meta:
+        model = Singer
+        fields = ['id', 'name', 'albums']
+
+    albums = SingerAlbumSerializer(many=True)
+
+
+class SingerCreateUpdateModelSerializer(ModelSerializer):
+    class Meta:
+        model = Album
+        fields = ['name']
