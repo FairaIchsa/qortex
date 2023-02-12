@@ -1,19 +1,21 @@
 from rest_framework.viewsets import ModelViewSet
 
-from .serializers import SingerModelSerializer, AlbumModelSerializer, SongModelSerializer
-from ..models import Singer, Album, Song
+from mainapp.api.singer.serializers import SingerModelSerializer
+from ..models import Singer
 
 
 class SingerModelViewset(ModelViewSet):
     queryset = Singer.objects.all()
-    serializer_class = SingerModelSerializer
+
+    def get_serializer_class(self):
+        if self.request == "GET":
+            print("Hi there")
+            return SingerModelSerializer
 
 
-class AlbumModelViewset(ModelViewSet):
-    queryset = Album.objects.all()
-    serializer_class = AlbumModelSerializer
 
-
-class SongModelViewset(ModelViewSet):
-    queryset = Song.objects.all()
-    serializer_class = SongModelSerializer
+#
+#
+# class SongModelViewset(ModelViewSet):
+#     queryset = Song.objects.all()
+#     serializer_class = SongModelSerializer
