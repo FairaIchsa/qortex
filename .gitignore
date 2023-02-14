@@ -1,5 +1,4 @@
 venv
-qortex/secret_settings.py
 .idea
 
 # Django #
@@ -7,7 +6,7 @@ qortex/secret_settings.py
 *.pot
 *.pyc
 __pycache__
-db.sqlite3
+# db.sqlite3
 media
 
 # Backup files #
